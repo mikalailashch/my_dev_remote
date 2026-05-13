@@ -32,5 +32,5 @@
         <members>Contact.Number_Of_Events__c</members>
         <name>CustomField</name>
     </types>
-    <version>65.0</version>
+    <version>66.0</version>
 </Package>
