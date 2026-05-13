@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="IlluminatedCloud" name="Illuminated Cloud">
       <configuration>
-        <option name="connectionName" value="My-dev-org" />
+        <option name="connectionName" value="myDevOrg" />
         <option name="connectionType" value="OAUTH" />
         <option name="defaultSourceRootUrl" value="file://$MODULE_DIR$/src" />
         <option name="moduleContents">
@@ -21,7 +21,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.sf" />
       <excludeFolder url="file://$MODULE_DIR$/.sfdx" />
     </content>
-    <orderEntry type="jdk" jdkName="IlluminatedCloud (My_dev_org/My-dev-org)" jdkType="IlluminatedCloud" />
+    <orderEntry type="jdk" jdkName="IlluminatedCloud (My_dev_org/myDevOrg)" jdkType="IlluminatedCloud" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="My_dev_org/lwc_types" level="project" />
   </component>

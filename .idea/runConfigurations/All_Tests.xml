@@ -1,11 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Tests" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" show_console_on_std_err="false" show_console_on_std_out="false">
+    <option name="aerCommandLineOptions" value="" />
     <option name="allTests" value="true" />
     <option name="allowRunningInParallel" value="false" />
     <option name="apexLogLevel" value="DEBUG" />
     <option name="calloutsLogLevel" value="INFO" />
     <option name="changedOnly" value="false" />
-    <option name="connectionName" value="My-dev-org" />
+    <option name="connectionName" value="myDevOrg" />
     <option name="connectionType" value="OAUTH" />
     <option name="contextConfiguration" value="false" />
     <option name="dataAccessLogLevel" value="INFO" />
@@ -19,6 +20,7 @@
     <option name="nbaLogLevel" value="INFO" />
     <option name="profilingLogLevel" value="INFO" />
     <option name="projectPathOnTarget" />
+    <option name="runWithAer" value="false" />
     <option name="selectedOptions">
       <list />
     </option>
@@ -31,12 +33,13 @@
     <option name="visualforceLogLevel" value="INFO" />
     <option name="waveLogLevel" value="INFO" />
     <option name="workflowLogLevel" value="INFO" />
+    <option name="aerCommandLineOptions" value="" />
     <option name="allTests" value="true" />
     <option name="allowRunningInParallel" value="false" />
     <option name="apexLogLevel" value="DEBUG" />
     <option name="calloutsLogLevel" value="INFO" />
     <option name="changedOnly" value="false" />
-    <option name="connectionName" value="My-dev-org" />
+    <option name="connectionName" value="myDevOrg" />
     <option name="connectionType" value="OAUTH" />
     <option name="contextConfiguration" value="false" />
     <option name="dataAccessLogLevel" value="INFO" />
@@ -50,6 +53,7 @@
     <option name="nbaLogLevel" value="INFO" />
     <option name="profilingLogLevel" value="INFO" />
     <option name="projectPathOnTarget" />
+    <option name="runWithAer" value="false" />
     <option name="selectedOptions">
       <list />
     </option>

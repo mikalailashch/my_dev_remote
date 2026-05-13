@@ -4,10 +4,10 @@
     <option name="connections">
       <list>
         <IlluminatedCloudConnection>
-          <option name="connectionName" value="My-dev-org" />
+          <option name="connectionName" value="myDevOrg" />
           <option name="connectionType" value="OAUTH" />
           <option name="defaultModuleName" value="My_dev_org" />
-          <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/My_dev_org/OfflineSymbolTable.zip" />
+          <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/myDevOrg/OfflineSymbolTable.zip" />
         </IlluminatedCloudConnection>
       </list>
     </option>
