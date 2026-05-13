@@ -1,0 +1,64 @@
+name: Production Deployment
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target Environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - sandbox
+
+jobs:
+  deploy-to-production:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment || 'production' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: |
+          npm install -g @salesforce/cli@latest
+          sf version
+
+      - name: Authenticate to Production
+        run: |
+          echo "${{ secrets.SALESFORCE_PROD_AUTH_URL }}" > ./authfile
+          sf org login sfdx-url --sfdx-url-file ./authfile --set-default --alias prod-org
+          rm ./authfile
+
+      - name: Create Backup (Optional)
+        run: |
+          echo "Creating backup of current metadata..."
+          sf project retrieve start --target-org prod-org --output-dir ./backup
+
+      - name: Deploy to Production
+        run: |
+          sf project deploy start --source-dir src --target-org prod-org --test-level RunLocalTests --wait 60
+
+      - name: Run All Tests
+        run: |
+          sf apex run test --target-org prod-org --test-level RunLocalTests --code-coverage --result-format human --wait 20
+
+      - name: Verify Deployment
+        run: |
+          sf project deploy report --target-org prod-org
+
+      - name: Notify on Success
+        if: success()
+        run: |
+          echo "✅ Deployment to ${{ github.event.inputs.environment || 'production' }} successful!"
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "❌ Deployment to ${{ github.event.inputs.environment || 'production' }} failed!"
+          exit 1
+

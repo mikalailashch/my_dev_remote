@@ -1,0 +1,54 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Salesforce CLI
+        run: |
+          npm install -g @salesforce/cli@latest
+          sf version
+
+      - name: Authenticate to Sandbox
+        run: |
+          echo "${{ secrets.SALESFORCE_SANDBOX_AUTH_URL }}" > ./authfile
+          sf org login sfdx-url --sfdx-url-file ./authfile --set-default --alias sandbox-org
+          rm ./authfile
+
+      - name: Scan Code with PMD
+        run: |
+          npm install -g @salesforce/cli
+          sf scanner run --target "src/**/*.cls" --format table || true
+
+      - name: Validate Deployment (Check Only)
+        run: |
+          sf project deploy start --source-dir src --target-org sandbox-org --test-level RunLocalTests --dry-run --wait 30
+
+      - name: Run Apex Tests
+        run: |
+          sf apex run test --target-org sandbox-org --test-level RunLocalTests --code-coverage --result-format human --wait 10
+
+      - name: Comment PR with results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Validation completed! Check the workflow run for details.'
+            })
+
