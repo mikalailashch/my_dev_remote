@@ -28,6 +28,15 @@ jobs:
           npm install -g @salesforce/cli@latest
           sf version
 
+      - name: Validate Salesforce Secret
+        run: |
+          if [ -z "${{ secrets.SALESFORCE_PROD_AUTH_URL }}" ]; then
+            echo "❌ ERROR: SALESFORCE_PROD_AUTH_URL secret is not set!"
+            echo "Please add the secret in GitHub Settings → Secrets → Actions"
+            echo "See GITHUB_ACTIONS_SETUP.md for detailed instructions"
+            exit 1
+          fi
+
       - name: Authenticate to Production
         run: |
           echo "${{ secrets.SALESFORCE_PROD_AUTH_URL }}" > ./authfile
